@@ -1,6 +1,4 @@
-import com.earldouglas.xwp.JettyPlugin
 import sbt._
-import Keys._
 
 /**
   * SBT构建入口
@@ -8,11 +6,16 @@ import Keys._
 object MainBuild extends Build {
 
   val fpp = Project("fpp",file("fpp"))
+  val fp1 = Project("fp1",file("fpp/fp1"))
+
+
   val akka = Project("akka",file("akka"))
   val algorithm = Project("algorithm", file("algorithm"))
 
   val main = Project("alg-fpp", file(".")).aggregate(
-    fpp, akka, algorithm
+    fpp, fp1,
+    akka,
+    algorithm
   )
 }
 
