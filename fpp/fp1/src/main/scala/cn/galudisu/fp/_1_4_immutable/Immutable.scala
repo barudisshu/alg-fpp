@@ -25,6 +25,6 @@ object Immutable extends App with LazyLogging {
   // ⑦ 默认的实现将提供了序列化。
 
   // 因此，尝试修改`name`的属性将出现编译错误
-  name.firstName = "Mrs. Bertie"
+//  name.firstName = "Mrs. Bertie"
 
 }
