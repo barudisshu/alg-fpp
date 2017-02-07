@@ -35,13 +35,3 @@ project/plugins/project/
 hs_err_pid*
 .idea/
 project/target/
-akka/
-algorithm/
-fpp/fp1/project/
-fpp/fp1/src/main/java/
-fpp/fp1/src/main/scala/cn/galudisu/fp/_1_5_referential_transparency/
-fpp/fp1/src/test/
-fpp/project/
-fpp/src/
-project/project/
-src/
