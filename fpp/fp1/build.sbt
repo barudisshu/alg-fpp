@@ -12,6 +12,10 @@ scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature")
 
 libraryDependencies ++= Seq(
   "org.scalatest" % "scalatest_2.11" % "3.0.1",
+  "junit" % "junit" % "4.12",
+  "org.hamcrest" % "hamcrest-all" % "1.3",
+  "com.google.guava" % "guava" % "21.0",
+  "org.apache.commons" % "commons-lang3" % "3.5",
   "org.mockito" % "mockito-all" % "1.9.5",
   "org.slf4j" % "slf4j-api" % "1.7.22",
   "org.apache.logging.log4j" % "log4j-core" % "2.7",
