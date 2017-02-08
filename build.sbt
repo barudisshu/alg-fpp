@@ -9,6 +9,7 @@ organization := "Scala in ALG & design pattern"
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.4.12",
   "com.typesafe.slick" %% "slick" % "3.1.1",
+  "org.scalaz" %% "scalaz-core" % "7.2.8",
   "mysql" % "mysql-connector-java" % "5.1.25",
   "org.scalatest" % "scalatest_2.11" % "3.0.1",
   "junit" % "junit" % "4.12",
@@ -20,7 +21,7 @@ libraryDependencies ++= Seq(
   "org.apache.logging.log4j" % "log4j-core" % "2.7",
   "org.apache.logging.log4j" % "log4j-api" % "2.7",
   "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.7",
-  "com.typesafe.scala-logging" % "scala-logging_2.11" % "3.5.0"
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0"
 )
 
 resolvers ++= Seq(

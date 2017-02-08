@@ -1,7 +1,5 @@
 package cn.galudisu.fp._1_6_grouping_continuous_integers_problem
 
-import com.typesafe.scalalogging.LazyLogging
-
 import scala.annotation.tailrec
 
 /**
@@ -9,7 +7,7 @@ import scala.annotation.tailrec
   *
   * @author galudisu
   */
-object GroupingContinuousIntegers extends App with LazyLogging {
+object GroupingContinuousIntegers {
 
   // 问题描述：对于给定的一个集合，若相邻的元素彼此只相差1，则将它们分配到一个group中。
 
@@ -24,7 +22,7 @@ object GroupingContinuousIntegers extends App with LazyLogging {
       case x :: xs =>
         acc match {
           case Nil => groupThem(xs, x :: acc)
-          case y :: ys if (x - y == 1) => groupThem(xs,x::acc)
+          case y :: ys if (x - y == 1) => groupThem(xs, x :: acc)
           case _ => acc.reverse :: groupThem(xs, x :: List())
         }
     }
@@ -32,6 +30,8 @@ object GroupingContinuousIntegers extends App with LazyLogging {
   }
 
   /**
+    * 尾递归是大多数传统递归的实现方式，处理方式是TCO(tail call optimization)，即先执行计算结果，再传递给递归处理。
+    * 注解 @tailrec，表示用于检测Scala是否对尾递归进行了优化，当不能优化你的函数或者方法时，编译器会在此注解的方法中抛出一个异常。
     * 尾递归实现
     */
   def groupNumbers(list: List[Int])(f: (Int, Int) => Boolean):
