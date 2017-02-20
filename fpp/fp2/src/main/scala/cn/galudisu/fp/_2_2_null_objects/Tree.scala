@@ -38,8 +38,13 @@ object Tree extends App {
     }
   }
 
-  val p = TreeNode(4).add(3).add(0).add(1).add(99).
-          add(1).add(4)
+  val p = TreeNode(4)
+          .add(3)
+          .add(0)
+          .add(1)
+          .add(99)
+          .add(1)
+          .add(4)
   for {
     q <- p.traverseInOrder() // 5
   } print(q.v + " ")
