@@ -10,12 +10,13 @@ object MainBuild extends Build {
   val fp2 = Project("fp2", file("fpp/fp2"))
   val fp3 = Project("fp3", file("fpp/fp3"))
   val fp4 = Project("fp4", file("fpp/fp4"))
+  val fp5 = Project("fp5", file("fpp/fp5"))
 
   val akka      = Project("akka", file("akka"))
   val algorithm = Project("algorithm", file("algorithm"))
 
-  val main = Project("alg-fpp", file(".")).aggregate(
-    fpp, fp1, fp2, fp3, fp4,
+  val main: Project = Project("alg-fpp", file(".")).aggregate(
+    fpp, fp1, fp2, fp3, fp4, fp5,
     akka,
     algorithm
   )

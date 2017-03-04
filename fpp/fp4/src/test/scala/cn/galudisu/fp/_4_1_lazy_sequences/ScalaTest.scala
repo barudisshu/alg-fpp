@@ -216,7 +216,7 @@ class ScalaTest extends FunSuite with BeforeAndAfter with Matchers with LazyLogg
     // 我们注意到pv的内容为`FFFFs`。它表示filter函数被存储了起来，并在调用了应用一次。
     // 下面我们跟踪一下这些语法的执行
 
-    def working(s: String) = println(s"Working on ${s}")
+    def working(s: String) = println(s"Working on $s")
     def isEmpty(s: String) = {
       working(s)
       s.isEmpty
