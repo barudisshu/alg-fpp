@@ -180,10 +180,73 @@ class ScalaTest extends FunSuite with BeforeAndAfter with Matchers with LazyLogg
     val p = sieve(numStream(2))
     logger info s"$p"
 
-    (p take 5) foreach {println(_)}
+    (p take 5) foreach { println(_) }
 
     // 由上我们可以得到：
-    // 1.
+    // 1. 使用`Stream.form()`方法生成Stream，开始于指定参数
+    // 2. sieve 方法接收一个stream，并延迟执行动作
+  }
+
+  /**
+    * 数据库包含视图，视图可以看做是一个虚表。视图尽存储查询，只对引用执行。
+    * Scala集合的view包含类似的功能。它属于 functional transformation。
+    */
+  test("A view to a collection") {
+
+    // 假若我们要给用户添加一个随机生成的临时密码，这个密码需要满足下面一些验证规则：
+    // 1. 不为空
+    // 2. 至少有一个大写字母
+    // 3. 包含数字字符
+    // 4. 必须有一个特殊字符
+    // 5. 不得少于5个字符
+
+    val p = List("", "9#greaT", "is great", "greater", "23#pp", "Aa#@4")
+    val pm = p filterNot (_.isEmpty) filter (_.exists(_.isDigit)) filter (_.exists(_.isUpper)) filter (_.matches("""^.*[\W].*$""")) filter (_.length >= 5)
+
+    logger info s"$pm"
+
+    // 上述代码的问题是，每个filter的执行都创建了一个中间List。原来的List不能更改，因为它是immutable的。因此我们需要使其为 lazily
+    val v = p.view
+    val pv = v filterNot (_.isEmpty) filter (_.exists(_.isDigit)) filter (_.exists(_.isUpper)) filter (_.matches("""^.*[\W].*$""")) filter (_.length >= 5)
+    val x = pv.take(1)
+
+    logger info s"$x"
+    logger info s"${x.force}" // force方法，将non-strict list 转换为一个 strict list。
+
+    // 我们注意到pv的内容为`FFFFs`。它表示filter函数被存储了起来，并在调用了应用一次。
+    // 下面我们跟踪一下这些语法的执行
+
+    def working(s: String) = println(s"Working on ${s}")
+    def isEmpty(s: String) = {
+      working(s)
+      s.isEmpty
+    }
+    def hasOneDigit(s: String) = {
+      working(s)
+      s.exists(_.isDigit)
+    }
+    def hasOneUpperCaseChar(s: String) = {
+      working(s)
+      s.exists(_.isUpper)
+    }
+    def matches(s: String) = {
+      working(s)
+      s.matches("""^.*[\W].*$""")
+    }
+    def hasMinLen(s: String) = {
+      working(s)
+      s.length >= 5
+    }
+
+    val pw = v.filterNot(isEmpty).filter(hasOneDigit).filter(hasOneUpperCaseChar).filter(matches).filter(hasMinLen)
+    val y = pw.take(4)
+
+    logger info s"$y"
+    logger info s"${y.force}"
+
+    // 上述跟踪发现，filter一次从第一个元素开始，若元素满足所有条件，作为结果。所以不再有中间list出现的情况。
+    // 同时也说明了，当List增大时，相比原来节约了更多的开销。
+
   }
 
 }
