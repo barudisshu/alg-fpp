@@ -1,4 +1,4 @@
-package cn.galudisu.fp._5_1_teractor_design_pattern;
+package cn.galudisu.fp._5_1_iteractor_design_pattern;
 
 /**
  * @author galudisu
