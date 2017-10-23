@@ -152,6 +152,10 @@ class CurryingTest extends FunSuite with BeforeAndAfter with Matchers with LazyL
     }
   }
 
+  /**
+    * 重复代码是主要的 code smell(坏味道).
+    * 我们要通过 extract 和 refactoring 进行clean code.
+    */
   test("Serving the curry") {
 
   }
