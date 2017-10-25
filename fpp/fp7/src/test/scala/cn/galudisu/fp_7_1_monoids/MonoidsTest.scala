@@ -78,7 +78,7 @@ class MonoidsTest extends FunSuite with BeforeAndAfter with Matchers with LazyLo
       def zero: A
     }
 
-    implicit val intMonoid = new Monoid[Int] {
+    implicit val intMonoid:Monoid[Int] = new Monoid[Int] {
       def append(a: Int, b: Int):Int = a + b
       def zero = 0
     }
@@ -86,9 +86,6 @@ class MonoidsTest extends FunSuite with BeforeAndAfter with Matchers with LazyLo
     def sum[A](ts: List[A])(implicit m: Monoid[A]): A = ts.foldLeft(m.zero)(m.append)
 
     logger info s"${sum(List(1,2,3))}"
-
-
-
   }
 
 }
