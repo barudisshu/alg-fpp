@@ -6,6 +6,7 @@ import sbt._
 object MainBuild extends Build {
 
   val fpp = Project("fpp", file("fpp"))
+
   val fp1 = Project("fp1", file("fpp/fp1"))
   val fp2 = Project("fp2", file("fpp/fp2"))
   val fp3 = Project("fp3", file("fpp/fp3"))
@@ -18,10 +19,21 @@ object MainBuild extends Build {
   val akka      = Project("akka", file("akka"))
   val algorithm = Project("algorithm", file("algorithm"))
 
+  val rdp = Project("rdp", file("rdp"))
+
+  val rd1 = Project("rd1", file("rdp/rd1"))
+
+
+  val frdm = Project("frdm", file("frdm"))
+
+  val frd1 = Project("frd1", file("frdm/frd1"))
+
   val main: Project = Project("alg-fpp", file(".")).aggregate(
     fpp, fp1, fp2, fp3, fp4, fp5, fp6, fp7, fp8,
     akka,
-    algorithm
+    algorithm,
+    rdp, rd1,
+    frdm, frd1
   )
 }
 
