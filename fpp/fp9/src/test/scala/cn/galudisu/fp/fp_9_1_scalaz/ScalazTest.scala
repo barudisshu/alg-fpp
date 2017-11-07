@@ -3,6 +3,7 @@ package cn.galudisu.fp.fp_9_1_scalaz
 import com.typesafe.scalalogging.LazyLogging
 import org.scalatest.{BeforeAndAfter, FunSuite, Matchers}
 
+import scala.concurrent.Future
 import scala.language.higherKinds
 import scalaz.Scalaz._
 import scalaz._
@@ -99,6 +100,20 @@ class ScalazTest extends FunSuite with BeforeAndAfter with Matchers with LazyLog
 
   }
 
+  test("`Functor` is something that can be mapped") {
+
+    def addSix[F[_]](toAdd: F[Int])(implicit mapper: Functor[F]): F[Int] = {
+      mapper.map(toAdd)(_ + 6)
+    }
+
+    assertResult(addSix(10.some))(Some(16))
+    assertResult(addSix(List(10)))(List(16))
+    assertResult(addSix(List(10, 11, 12, 13)))(List(16, 17, 18, 19))
+  }
+
+  test("monad definition in scalaz is effectively") {
+
+  }
 }
 
 
