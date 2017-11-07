@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF" monitorInterval="1800">
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <ThresholdFilter level="TRACE" onMatch="ACCEPT"/>
+            <PatternLayout
+                    pattern="%highlight{✂✂ %date{HH:mm:ss.SSS} %-5level %logger{0} %c{1.1.~.~} {%method}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=blinking green, TRACE=blue}  %n %style{↳}{bright,yellow} %style{%msg%n%throwable}{bright,green} %n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

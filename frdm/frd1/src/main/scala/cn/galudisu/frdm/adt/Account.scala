@@ -81,7 +81,7 @@ case class SavingsAccount(
  dateOfClose: Option[Date],
 
   // ..
-  rateOfInterest: BigDecimal,
+  rateOfInterest: BigDecimal
   // ..
 ) extends Account
 
@@ -96,7 +96,7 @@ case class SavingsAccount(
 
 trait AccountService {
   type Amount = BigDecimal
-  def transfer(from: Account, to: Account, amount: Amount): Option[Amount]
+  def transfer(from: Account, to: Account, amount: Amount): Try[(Account,Account)]
 }
 
 /**
@@ -137,30 +137,3 @@ trait AccountServiceImpl extends AccountService{
   } yield (d,c)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
