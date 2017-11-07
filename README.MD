@@ -11,6 +11,7 @@
     - [ ] fp6: 科里化
     - [ ] fp7: Monoids
     - [ ] fp8: Monads
+    - [ ] fp9: Scalaz
 - Reactive.Design.Patterns(响应式设计模式)
     - [ ] fp1:
 - Functional.and.Reactive.Domain.Modeling(函数式领域驱动设计)
