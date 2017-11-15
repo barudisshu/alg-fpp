@@ -19,11 +19,11 @@ object MainBuild extends Build {
 
   val akka      = Project("akka", file("akka"))
   val algorithm = Project("algorithm", file("algorithm"))
+  val mongodb   = Project("mongodb", file("mongodb"))
 
   val rdp = Project("rdp", file("rdp"))
 
   val rd1 = Project("rd1", file("rdp/rd1"))
-
 
   val frdm = Project("frdm", file("frdm"))
 
@@ -33,6 +33,7 @@ object MainBuild extends Build {
     fpp, fp1, fp2, fp3, fp4, fp5, fp6, fp7, fp8, fp9,
     akka,
     algorithm,
+    mongodb,
     rdp, rd1,
     frdm, frd1
   )

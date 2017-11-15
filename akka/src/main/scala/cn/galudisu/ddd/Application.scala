@@ -7,6 +7,7 @@ import akka.cluster.sharding.{ClusterSharding, ClusterShardingSettings}
 import akka.event.{Logging, LoggingAdapter}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server.Route
 import akka.pattern.ask
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
@@ -32,7 +33,7 @@ object Application extends App with AkkaInjectable {
   implicit val appModule = new PlayerModule
   val player = inject[ActorRef]('player)
 
-  val routes = {
+  val routes:Route = {
     logRequestResult("server") {
       (post & path("register")) {
         complete {
