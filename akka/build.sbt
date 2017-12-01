@@ -20,17 +20,19 @@ libraryDependencies ++= Seq(
   "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.7",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0",
 
-  "com.typesafe.akka" %% "akka-actor" % "2.5.6",
-  "com.typesafe.akka" %% "akka-persistence" % "2.5.6",
+  "com.typesafe.akka" %% "akka-actor" % "2.5.7",
+  "com.typesafe.akka" %% "akka-slf4j" % "2.5.7",
+  "com.typesafe.akka" %% "akka-persistence" % "2.5.7",
   "com.typesafe.akka" %% "akka-http" % "10.0.10",
   "com.typesafe.akka" %% "akka-http-spray-json" % "10.0.10",
-  "com.typesafe.akka" %% "akka-remote" % "2.5.6",
-  "com.typesafe.akka" %% "akka-cluster" % "2.5.6",
-  "com.typesafe.akka" %% "akka-cluster-sharding" % "2.5.6",
+  "com.typesafe.akka" %% "akka-remote" % "2.5.7",
+  "com.typesafe.akka" %% "akka-cluster" % "2.5.7",
+  "com.typesafe.akka" %% "akka-cluster-tools" % "2.5.7",
+  "com.typesafe.akka" %% "akka-cluster-sharding" % "2.5.7",
   "org.scaldi" %% "scaldi-akka" % "0.5.8",
 
   // level db for local persistence
-  "org.iq80.leveldb"            % "leveldb"          % "0.7",
+  "org.iq80.leveldb"            % "leveldb"          % "0.9",
   "org.fusesource.leveldbjni"   % "leveldbjni-all"   % "1.8"
 
 )

@@ -50,11 +50,11 @@ object Application extends App with AkkaInjectable {
 
 class PlayerModule(implicit system: ActorSystem) extends Module {
 
-  val numberOfShards = 100
+  val numberOfShards = 2
 
   val playerRegion: ActorRef = ClusterSharding(system).start(
     typeName = "Player",
-    entityProps = Props[PlayerActor],
+    entityProps = Props(new PlayerActor),
     settings = ClusterShardingSettings(system),
     extractEntityId = PlayerActor.extractEntityId(),
     extractShardId = PlayerActor.extractShardId(numberOfShards)
