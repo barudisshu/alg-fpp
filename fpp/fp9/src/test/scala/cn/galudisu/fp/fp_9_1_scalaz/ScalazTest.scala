@@ -114,6 +114,28 @@ class ScalazTest extends FunSuite with BeforeAndAfter with Matchers with LazyLog
   test("monad definition in scalaz is effectively") {
 
   }
+
+  test("higher-kinded types") {
+
+    trait Mapper[F[_]] {
+      def fmap[A,B](xs: F[A], f: A => B): F[B]
+    }
+
+    def EitherMapper[X] = new Mapper[({type E[A] = Either[X,A]})#E] {
+      override def fmap[A, B](xs: Either[X, A], f: A => B): Either[X, B] =
+        xs match {
+          case Left(c) => Left(c)
+          case Right(x) => Right(f(x))
+        }
+    }
+
+    val either = Either.cond(test = true, "one", new RuntimeException)
+    println(s"$either")
+    println(f"${EitherMapper.fmap(either, (s: String) => s.toUpperCase) }")
+  }
+
+
+
 }
 
 
