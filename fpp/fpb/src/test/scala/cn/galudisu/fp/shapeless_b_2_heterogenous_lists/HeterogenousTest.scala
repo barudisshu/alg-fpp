@@ -28,6 +28,15 @@ class HeterogenousTest extends FunSuite with BeforeAndAfter with Matchers with L
     l.foldLeft(0)(addSize) should be(11)
   }
 
+  test("zipper for update") {
+    import syntax.zipper._
+
+    val l = 1 :: "foo" :: 3.0 :: HNil
+    l.toZipper.right.put(("wibble", 45)).reify should be(1 :: ("wibble", 45) :: 3.0 :: HNil)
+
+    l.toZipper.right.delete.reify should be(1 :: 3.0 :: HNil)
+  }
+
   test("covariant") {
     import CovariantHelper._
 

@@ -28,6 +28,8 @@ class TuplesTest extends FunSuite with BeforeAndAfter with Matchers with LazyLog
     xs.head should be(23)
     xs.tail should be("foo", true)
     xs.drop(2) should be(Tuple1(true))
+    xs.split(1) should be((Tuple1(23), ("foo", true)))
+
   }
 
   test("to HList") {
@@ -40,7 +42,6 @@ class TuplesTest extends FunSuite with BeforeAndAfter with Matchers with LazyLog
 
   test("zipper") {
     import syntax.zipper._
-
 
     val l = (23, ("foo", true), 2.0).toZipper.right.down.put("bar").root.reify
     l should be((23, ("bar", true), 2.0))
