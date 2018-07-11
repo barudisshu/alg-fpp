@@ -19,6 +19,7 @@ object MainBuild extends Build {
   val fpa = Project("fpa", file("fpp/fpa"))
   val fpb = Project("fpb", file("fpp/fpb"))
   val fpc = Project("fpc", file("fpp/fpc"))
+  val fpd = Project("fpd", file("fpp/fpd"))
 
   val akka      = Project("akka", file("akka"))
   val algorithm = Project("algorithm", file("algorithm"))
@@ -33,7 +34,7 @@ object MainBuild extends Build {
   val frd1 = Project("frd1", file("frdm/frd1"))
 
   val main: Project = Project("alg-fpp", file(".")).aggregate(
-    fpp, fp1, fp2, fp3, fp4, fp5, fp6, fp7, fp8, fp9, fpa, fpb, fpc,
+    fpp, fp1, fp2, fp3, fp4, fp5, fp6, fp7, fp8, fp9, fpa, fpb, fpc, fpd,
     akka,
     algorithm,
     mongodb,

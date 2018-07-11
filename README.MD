@@ -15,6 +15,7 @@
     - [ ] fpa: Cats
     - [ ] fpb: Shapeless
     - [ ] fpc: Slick
+    - [ ] fpd: Type-Level Computations
 - Reactive.Design.Patterns(响应式设计模式)
     - [ ] fp1:
 - Functional.and.Reactive.Domain.Modeling(函数式领域驱动设计)
