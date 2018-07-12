@@ -23,6 +23,7 @@ libraryDependencies ++= Seq(
   "com.zaxxer" % "HikariCP" % "2.7.8",
 
   "com.typesafe.slick" %% "slick" % "3.2.1",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.1"
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.1",
+  "com.typesafe.slick" %% "slick-codegen" % "3.2.1"
 
 )
