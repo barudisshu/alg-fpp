@@ -23,4 +23,11 @@ class ActionDaoSpec extends FlatSpec with Matchers with ScalaFutures {
     maybeAction.isDefined should be(true)
     maybeAction.get.name should be("New Hello!")
   }
+
+  "findByName" should "find a row" in {
+    actionDao.save("galudisu is handsome").futureValue
+    val maybeAction = actionDao.filter("galudisu").futureValue
+
+    maybeAction.get.name should be ("galudisu is handsome")
+  }
 }

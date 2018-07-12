@@ -26,4 +26,9 @@ case class ActionDaoImpl(db: Database) extends ActionDao {
     } yield actionId).transactionally
     db.run(actions)
   }
+
+  override def filter(name: String): Future[Option[Tables.ActionRow]] = {
+    val action = Action.filter(_.name like s"%$name%").result.headOption
+    db.run(action)
+  }
 }
