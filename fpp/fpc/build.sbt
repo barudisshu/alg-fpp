@@ -25,5 +25,22 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "3.2.1",
   "com.typesafe.slick" %% "slick-hikaricp" % "3.2.1",
   "com.typesafe.slick" %% "slick-codegen" % "3.2.1"
-
 )
+
+slick <<= slickCodeGenTask
+
+sourceGenerators in Compile <+= slickCodeGenTask
+
+lazy val slick = TaskKey[Seq[File]]("gen-tables")
+lazy val slickCodeGenTask = (sourceDirectory, dependencyClasspath in Compile, runner in Compile, streams) map { (dir, cp, r, s) =>
+  val outputDir = (dir / "main/scala").getPath
+  val username = "root"
+  val password = "8612"
+  val url = "jdbc:mysql:///test?nullNamePatternMatchesAll=true&serverTimezone=UTC"
+  val jdbcDriver = "com.mysql.cj.jdbc.Driver"
+  val slickDriver = "slick.jdbc.MySQLProfile"
+  val pkg = "cn.galudisu.fp.models"
+  toError(r.run("slick.codegen.SourceCodeGenerator", cp.files, Array(slickDriver, jdbcDriver, url, outputDir, pkg, username, password), s.log))
+  val fname = outputDir + "/" + "cn/galudisu/fp/models" + "/Tables.scala"
+  Seq(file(fname))
+}
