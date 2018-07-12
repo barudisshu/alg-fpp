@@ -32,7 +32,7 @@ slick <<= slickCodeGenTask
 sourceGenerators in Compile <+= slickCodeGenTask
 
 lazy val slick = TaskKey[Seq[File]]("gen-tables")
-lazy val slickCodeGenTask = (sourceDirectory, dependencyClasspath in Compile, runner in Compile, streams) map { (dir, cp, r, s) =>
+lazy val slickCodeGenTask = (sourceManaged, dependencyClasspath in Compile, runner in Compile, streams) map { (dir, cp, r, s) =>
   val outputDir = (dir / "main/scala").getPath
   val username = "root"
   val password = "8612"
