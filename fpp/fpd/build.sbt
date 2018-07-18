@@ -16,6 +16,13 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-api" % "1.7.22",
   "org.scala-lang" % "scala-compiler" % "2.11.8",
   "org.scala-lang" % "scala-reflect" % "2.11.8",
+
+  // 宏依赖
+  "org.typelevel" %% "cats-core" % "1.0.1",
+  "org.typelevel" %% "cats-kernel" % "1.0.1",
+  "org.typelevel" %% "cats-macros" % "1.0.1",
+  "org.typelevel" %% "macro-compat" % "1.1.1",
+
   "org.apache.logging.log4j" % "log4j-core" % "2.7",
   "org.apache.logging.log4j" % "log4j-api" % "2.7",
   "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.7",
