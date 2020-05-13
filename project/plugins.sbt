@@ -1,15 +1,10 @@
-import sbt.Keys._
-
 logLevel := Level.Warn
-addSbtPlugin("io.spray" % "sbt-revolver" % "0.7.2")
+addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.2")
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.3.2")
+addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "1.0.0")
+addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.2.1")
+addSbtPlugin("com.lucidchart" % "sbt-scalafmt-coursier" % "1.12")
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.5")
+addSbtPlugin("com.github.tototoshi" % "sbt-slick-codegen" % "1.3.0")
 
-addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.5.2")
-
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.9.0")
-
-addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % "2.1.0")
-
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.4.0-RC5")
-
-resolvers += Resolver.sonatypeRepo("public")
 
