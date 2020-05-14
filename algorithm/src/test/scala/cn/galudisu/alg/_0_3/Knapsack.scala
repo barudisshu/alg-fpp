@@ -1,5 +1,7 @@
 package cn.galudisu.alg._0_3
 
+import scala.annotation.tailrec
+
 /**
   * 0-1 背包问题
   * 问题描述：我们有以下物品。每个物品有重量(weight)和价值(worth value)
@@ -38,7 +40,7 @@ object Knapsack {
   /**
     * 根据背包容纳质量和物品，是否选取
     */
-  def maxV(items: List[I], w: Int): List[I] = {
+  def maxV(items: List[I], w: W): List[I] = {
     items match {
       case Nil                         => Nil
       case xs :: left if xs.weight > w => maxV(left, w)
@@ -46,6 +48,30 @@ object Knapsack {
         if (maxV(left, w).map(_.value).sum >= (xs :: maxV(left, w - xs.weight)).map(_.value).sum) maxV(left, w)
         else xs :: maxV(left, w - xs.weight)
     }
+  }
+
+  case class Bag(bagged: List[I], maxWeight: W) {
+    def isNotFull: Boolean = totWeight <= maxWeight
+    def totValue: V        = bagged.map(_.value).sum
+    def totWeight: W       = bagged.map(_.weight).sum
+  }
+
+  /**
+    * 尾递归实现
+    */
+  @tailrec
+  def packer(items: List[I], notPacked: List[Bag], packed: List[Bag], w: W): List[Bag] = {
+    def fill(bag: Bag): List[Bag]           = items.map(i => Bag(i +: bag.bagged, w))
+    def stuffer(bags: List[Bag]): List[Bag] = bags.map(b => Bag(b.bagged.sortBy(_.weight), w)).distinct
+    if (notPacked.isEmpty) packed.sortBy(-_.totValue).take(w)
+    else packer(items, stuffer(notPacked.flatMap(fill)).filter(_.isNotFull), notPacked ++ packed, w)
+  }
+  def max(b1: Bag, b2: Bag): Bag = if (b1.totValue > b2.totValue) b1 else b2
+  def maxP(items: List[I], w: W): List[I] = {
+    packer(items, items.map(i => Bag(List(i), w)), Nil, w)
+      .map(f => Bag(f.bagged.distinct, f.maxWeight))
+      .reduceLeft(max)
+      .bagged
   }
 
   // 排序的
@@ -58,5 +84,7 @@ object Knapsack {
     println("the items took:             " + k.map(v => "[%2d, %2d]".format(v.weight, v.value)).mkString(" "))
     println("the max value of knapsack:  " + k.map(_.value).sum + "($)")
     println("the max weight of knapsack: " + k.map(_.weight).sum + "(kg)")
+    val p = maxP(items, 11)
+    println("the items took:             " + p.map(v => "[%2d, %2d]".format(v.weight, v.value)).mkString(" "))
   }
 }
