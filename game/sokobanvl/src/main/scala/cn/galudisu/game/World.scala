@@ -85,7 +85,7 @@ object World extends Publisher {
     }
   }
 
-  private def locateMan() {
+  private def locatePlayer() {
     for {
       i <- currentLevel.indices
       j <- currentLevel(i).indices
@@ -99,7 +99,7 @@ object World extends Publisher {
   }
 
   private def move(x: Int, y: Int) {
-    locateMan()
+    locatePlayer()
     toGoX = x
     toGoY = y
     nb_move += 1
@@ -119,30 +119,30 @@ object World extends Publisher {
     currentLevel(bhCrateX)(bhCrateY) match {
       case _: Floor =>
         currentLevel(bhCrateX)(bhCrateY) = Box()
-        moveManToSpaceOrStorage(x, y)
+        movePlayToFloorOrGoalSquare(x, y)
       case _: GoalSquare =>
         currentLevel(bhCrateX)(bhCrateY) = BoxOnGoalSquare()
-        moveManToSpaceOrStorage(x, y)
+        movePlayToFloorOrGoalSquare(x, y)
       case _ =>
     }
   }
 
   private def movePlayerToFloor() {
-    letSpaceOrStorage()
+    letFloorOrGoalSquare()
     manX = manX + toGoX
     manY = manY - toGoY
     currentLevel(manX)(manY) = Player()
   }
 
   private def movePlayerToGoalSquare() {
-    letSpaceOrStorage()
+    letFloorOrGoalSquare()
     manX = manX + toGoX
     manY = manY - toGoY
     currentLevel(manX)(manY) = PlayerOnGoalSquare()
 
   }
 
-  private def letSpaceOrStorage() {
+  private def letFloorOrGoalSquare() {
     currentLevel(manX)(manY) match {
       case _: Player =>
         currentLevel(manX)(manY) = element.Floor()
@@ -151,7 +151,7 @@ object World extends Publisher {
     }
   }
 
-  private def moveManToSpaceOrStorage(x: Int, y: Int) {
+  private def movePlayToFloorOrGoalSquare(x: Int, y: Int) {
     currentLevel(x)(y) match {
       case _: Box =>
         movePlayerToFloor()
