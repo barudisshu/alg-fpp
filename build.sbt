@@ -177,6 +177,48 @@ lazy val mongodb =
     )
   )
 
+lazy val game =
+  project
+    .settings(
+      name := "game-solve",
+      settings,
+      libraryDependencies ++= commonDependencies
+    )
+    .disablePlugins(AssemblyPlugin)
+    .aggregate(sokoban, sokobanvl, sudoku)
+
+lazy val sokoban = project
+  .in(file("game/sokoban"))
+  .settings(
+    name := "sokoban",
+    settings,
+    unmanagedJars in Compile ++= (file("game/lib/") * "*.jar").classpath,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.scalaSwing
+    )
+  )
+  .disablePlugins(AssemblyPlugin)
+
+lazy val sokobanvl = project
+  .in(file("game/sokobanvl"))
+  .settings(
+    name := "sokoban-visualiz",
+    settings,
+    libraryDependencies ++= commonDependencies
+  )
+  .dependsOn(sokoban)
+  .disablePlugins(AssemblyPlugin)
+
+lazy val sudoku = project
+  .in(file("game/sudoku"))
+  .settings(
+    name := "sudoku",
+    settings,
+    unmanagedJars in Compile ++= (file("game/lib/") * "*.jar").classpath,
+    libraryDependencies ++= commonDependencies
+  )
+  .disablePlugins(AssemblyPlugin)
+
 // DEPENDENCIES
 
 lazy val dependencies =
@@ -202,6 +244,7 @@ lazy val dependencies =
     val junitV         = "4.12"
     val scalatestV     = "3.0.4"
     val scalacheckV    = "1.13.5"
+    val scalaSwingV    = "2.1.1"
 
     val log4jCore    = "org.apache.logging.log4j"   % "log4j-core"       % log4jV
     val log4jApi     = "org.apache.logging.log4j"   % "log4j-api"        % log4jV
@@ -248,6 +291,8 @@ lazy val dependencies =
     val junit        = "junit"                      % "junit"          % junitV
     val scalatest    = "org.scalatest"              %% "scalatest"     % scalatestV
     val scalacheck   = "org.scalacheck"             %% "scalacheck"    % scalacheckV
+
+    val scalaSwing = "org.scala-lang.modules" %% "scala-swing" % scalaSwingV
   }
 
 lazy val commonDependencies = Seq(
