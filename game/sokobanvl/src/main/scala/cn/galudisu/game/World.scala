@@ -9,6 +9,7 @@ import scala.swing.event.Event
 import scala.swing.event.Key._
 
 case class PlayerMove() extends Event
+case class PlayerHint() extends Event
 
 object World extends Publisher {
   type Level = Array[Array[WorldElement]]
@@ -44,9 +45,8 @@ object World extends Publisher {
   }
 
   def fromString(stringWorld: String): Level = {
-    val level         = Array.ofDim[WorldElement](MAX_WIDTH, MAX_HEIGHT)
-    val listStringMap = stringWorld.toList
-
+    val level             = Array.ofDim[WorldElement](MAX_WIDTH, MAX_HEIGHT)
+    val listStringMap     = stringWorld.toList
     var wEl: WorldElement = null
     var x, y              = 0
     for (i <- listStringMap.indices) {
@@ -56,8 +56,8 @@ object World extends Publisher {
         case '$' => wEl = Box()
         case '@' => wEl = Player()
         case '+' => wEl = PlayerOnGoalSquare()
-        case '*' => wEl = PlayerOnGoalSquare()
-        case ' ' => wEl = element.Floor()
+        case '*' => wEl = BoxOnGoalSquare()
+        case ' ' => wEl = Floor()
         case '\n' =>
           y += 1
           x = 0

@@ -66,7 +66,7 @@ object Solver {
     val board = for (i <- 0 until m; s = lines.next)
       yield s.map(_.toString)
     source.close
-    new Puzzle(m, n, board)
+    Puzzle(m, n, board)
   }
 
   def define(minSteps: Int, maxSteps: Int) {

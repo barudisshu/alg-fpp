@@ -204,9 +204,10 @@ lazy val sokobanvl = project
   .settings(
     name := "sokoban-visualiz",
     settings,
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= commonDependencies ++ Seq(
+      dependencies.scalaSwing
+    )
   )
-  .dependsOn(sokoban)
   .disablePlugins(AssemblyPlugin)
 
 lazy val sudoku = project
