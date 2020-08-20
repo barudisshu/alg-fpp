@@ -220,6 +220,20 @@ lazy val sudoku = project
   )
   .disablePlugins(AssemblyPlugin)
 
+lazy val tank = project
+  .in(file("game/tank"))
+  .settings(
+    name := "tank",
+    settings,
+    libraryDependencies ++= Seq(
+      dependencies.scalaSwing,
+      dependencies.scalaz,
+      dependencies.scalatest,
+      dependencies.scalacheck
+    )
+  )
+  .disablePlugins(AssemblyPlugin)
+
 // DEPENDENCIES
 
 lazy val dependencies =
@@ -230,7 +244,7 @@ lazy val dependencies =
     val hamcrestV      = "1.3"
     val guavaV         = "21.0"
     val commonlangV    = "3.5"
-    val scalazV        = "7.2.8"
+    val scalazV        = "7.3.2"
     val shapelessV     = "2.3.2"
     val scaldiV        = "0.5.8"
     val leveldbV       = "0.9"
@@ -346,6 +360,7 @@ lazy val settings =
     scalafmtSettings
 
 lazy val compilerOptions = Seq(
+  "-Xlog-implicits",
   "-unchecked",
   "-feature",
   "-language:existentials",
